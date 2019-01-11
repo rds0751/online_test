@@ -68,20 +68,11 @@ WSGI_APPLICATION = 'online_test.wsgi.application'
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.{0}'.format(
-            config('DB_ENGINE', default='sqlite3')
-        ),
-        'NAME': config('DB_NAME',
-                       default=os.path.join(BASE_DIR, 'db.sqlite3')
-                       ),
-        # The following settings are not used with sqlite3:
-        'USER': config('DB_USER', default=''),
-        'PASSWORD': config('DB_PASSWORD', default=''),
-        # Empty for localhost through domain sockets or '1$
-        'HOST': config('DB_HOST', default='localhost'),
-        'PORT': config('DB_PORT', default=''),
-    },
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    }
 }
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.6/topics/i18n/
