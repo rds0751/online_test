@@ -16,6 +16,8 @@ from decouple import config
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
+env = environ.Env()
+
 # The directory where user data can be saved.  This directory will be
 # world-writable and all user code will be written and saved here by the
 # code server with each user having their own sub-directory.
