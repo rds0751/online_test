@@ -1,4 +1,4 @@
--r requirements-codeserver.txt
+-r requirements/requirements-codeserver.txt
 invoke==0.21.0
 django==1.10
 django-taggit==0.18.1
