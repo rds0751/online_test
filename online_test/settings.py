@@ -9,6 +9,7 @@ https://docs.djangoproject.com/en/1.6/ref/settings/
 """
 from yaksh.pipeline.settings import AUTH_PIPELINE
 import os
+import sys
 from decouple import config
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
