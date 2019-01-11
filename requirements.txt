@@ -11,3 +11,4 @@ ruamel.yaml==0.15.23
 markdown==2.6.9
 gunicorn
 dj-static==0.0.6
+django-environ>=0.4.4  # https://github.com/joke2k/django-environ
