@@ -741,7 +741,7 @@ class Course(models.Model):
     creator = models.ForeignKey(User, related_name='creator')
     students = models.ManyToManyField(User, related_name='students')
     requests = models.ManyToManyField(User, related_name='requests')
-    rejected = models.ManyToManyField(User, related_name='rejected')
+    rejected = models.ManyToManyField(User, related_name='rejected', null=True)
     created_on = models.DateTimeField(auto_now_add=True)
     teachers = models.ManyToManyField(User, related_name='teachers')
     is_trial = models.BooleanField(default=False)
@@ -1038,7 +1038,7 @@ class CourseStatus(models.Model):
     def calculate_percentage(self):
         if self.is_course_complete():
             quizzes = self.course.get_quizzes()
-            total_weightage = 0
+            total_weightage = 100
             sum = 0
             for quiz in quizzes:
                 total_weightage += quiz.weightage
@@ -1362,6 +1362,25 @@ class Question(models.Model):
     def __str__(self):
         return self.summary
 
+###############################################################################
+class QuestionSet(models.Model):
+    """Question set contains a set of questions from which random questions
+       will be selected for the quiz.
+    """
+
+    # Marks of each question of a particular Question Set
+    marks = models.FloatField()
+
+    # Number of questions to be fetched for the quiz.
+    num_questions = models.IntegerField()
+
+    # Set of questions for sampling randomly.
+    questions = models.ManyToManyField(Question)
+
+    def get_random_questions(self):
+        """ Returns random questions from set of questions"""
+        return sample(list(self.questions.all()), self.num_questions)
+
 
 ###############################################################################
 class FileUpload(models.Model):
@@ -1478,7 +1497,7 @@ class QuestionPaper(models.Model):
     fixed_questions = models.ManyToManyField(Question)
 
     # Questions that will be fetched randomly from the Question Set.
-    random_questions = models.ManyToManyField("QuestionSet")
+    random_questions = models.ManyToManyField(QuestionSet)
 
     # Option to shuffle questions, each time a new question paper is created.
     shuffle_questions = models.BooleanField(default=False, blank=False)
@@ -1653,25 +1672,6 @@ class QuestionPaper(models.Model):
 
 
 ###############################################################################
-class QuestionSet(models.Model):
-    """Question set contains a set of questions from which random questions
-       will be selected for the quiz.
-    """
-
-    # Marks of each question of a particular Question Set
-    marks = models.FloatField()
-
-    # Number of questions to be fetched for the quiz.
-    num_questions = models.IntegerField()
-
-    # Set of questions for sampling randomly.
-    questions = models.ManyToManyField(Question)
-
-    def get_random_questions(self):
-        """ Returns random questions from set of questions"""
-        return sample(list(self.questions.all()), self.num_questions)
-
-
 ###############################################################################
 class AnswerPaperManager(models.Manager):
     def get_all_questions(self, questionpaper_id, attempt_number, course_id,

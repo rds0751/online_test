@@ -1,6 +1,9 @@
 from yaksh.models import Question, Quiz, QuestionPaper, Profile
 from yaksh.models import (TestCase, StandardTestCase, StdIOBasedTestCase,
                           Course, AnswerPaper)
+from yaksh.models import (Lesson, LessonFile)
+from yaksh.models import (LearningModule,LearningUnit)
+from yaksh.models import (QuestionSet)
 from django.contrib import admin
 
 
@@ -23,3 +26,8 @@ admin.site.register(Course)
 admin.site.register(Quiz)
 admin.site.register(QuestionPaper)
 admin.site.register(AnswerPaper, AnswerPaperAdmin)
+admin.site.register(LearningModule)
+admin.site.register(Lesson)
+admin.site.register(LessonFile)
+admin.site.register(LearningUnit)
+admin.site.register(QuestionSet)
