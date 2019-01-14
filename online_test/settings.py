@@ -12,6 +12,7 @@ import os
 import sys
 import environ
 from decouple import config
+import dj_database_url
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
@@ -71,11 +72,9 @@ WSGI_APPLICATION = 'online_test.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
+    'default': dj_database_url.config(
+        default='postgres://dwysovbriwjgna:8b3a9e6adf651e05919b0c233687aa68848c824c56f1bc5f295f7ebcdd8e50d6@ec2-107-20-237-78.compute-1.amazonaws.com:5432/d22t1i4v9u8p3d',
+        conn_max_age=600)}
 
 
 # Internationalization
