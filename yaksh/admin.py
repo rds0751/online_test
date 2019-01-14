@@ -1,6 +1,6 @@
 from yaksh.models import Question, Quiz, QuestionPaper, Profile
 from yaksh.models import (TestCase, StandardTestCase, StdIOBasedTestCase,
-                          Course, AnswerPaper)
+                          Course, AnswerPaper, Answer)
 from yaksh.models import (Lesson, LessonFile)
 from yaksh.models import (LearningModule,LearningUnit)
 from yaksh.models import (QuestionSet)
@@ -31,3 +31,4 @@ admin.site.register(Lesson)
 admin.site.register(LessonFile)
 admin.site.register(LearningUnit)
 admin.site.register(QuestionSet)
+admin.site.register(Answer)
